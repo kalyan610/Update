@@ -83,6 +83,7 @@ export interface IUpdateState {
   Costvalue:string;
   Currvalue:string;
   Descriptionvalue:string;
+  AccessibilityDescription:string;
 TechnicalOwnervalue:string;
 AmountPurchasedvalue:string;
 AmountUsedvalue:string;
@@ -97,6 +98,8 @@ Websitevalue:string;
 SupportHoursvalue:string;
 RelationshipLicenceownervalue:string;
 ToggleHidevalue:string;
+Restrickedvalue:string;
+AccessibilityTool:string;
 }
 
 //export default class Update extends React.Component<IUpdateProps, {}> {
@@ -127,6 +130,7 @@ ToggleHidevalue:string;
         Costvalue:"",
         Currvalue:"",
         Descriptionvalue:"",
+        AccessibilityDescription:"",
         TechnicalOwnervalue:"",
         AmountPurchasedvalue:"",
         AmountUsedvalue:"",
@@ -140,8 +144,10 @@ Emailvalue:"",
 Websitevalue:"",
 SupportHoursvalue:"",
 RelationshipLicenceownervalue:"",
-ToggleHidevalue:""
-        
+ToggleHidevalue:"",
+Restrickedvalue:"",
+AccessibilityTool:"",
+
   
       };
   
@@ -435,6 +441,27 @@ ToggleHidevalue:""
       });  
   
     } 
+
+    public Restricked(ev: React.FormEvent<HTMLInputElement>, option: any): void {  
+
+      this.setState({  
+  
+       Restrickedvalue: option.key  
+  
+      });  
+  
+    } 
+
+    public AccessibilityTool(ev: React.FormEvent<HTMLInputElement>, option: any): void {  
+
+      this.setState({  
+  
+        AccessibilityTool: option.key  
+  
+      });  
+  
+    } 
+  
   
 
     public handleChanges = (event) => {
@@ -514,6 +541,19 @@ alert(event.target.value)
         Descriptionvalue: event.target.value,
       
       });
+    };
+      public handleChangeAccessibilityDescription = (event) => {
+
+    
+
+        console.log(event.target.value);
+      
+        this.setState({
+      
+          
+          AccessibilityDescription: event.target.value,
+        
+        });
     
     };
     public handleChangeTechnical = (event) => {
@@ -604,7 +644,7 @@ this.setState({AmountUsedvalue:ItemInfo.AmountUsed})
 this.setState({AmountPurchasedvalue:ItemInfo.AmountPurchased})
 this.setState({InfoSecOutcomevalue:ItemInfo.InfoSecOutcome})
 this.setState({ReasonforInfoSecDeclinevalue:ItemInfo.ReasonforInfoSecDecline})
-this.setState({ApplicationRestrictedtovalue:ItemInfo.ApplicationRestrictedto})
+this.setState({ApplicationRestrictedtovalue:ItemInfo.RestrictedGroup})
 this.setState({Providervalue:ItemInfo.Provider})
 this.setState({ContactNamevalue:ItemInfo.ContactName})
 this.setState({TelMobvalue:ItemInfo.TelorMobile})
@@ -613,6 +653,9 @@ this.setState({Emailvalue:ItemInfo.Email})
 this.setState({SupportHoursvalue:ItemInfo.SupportHours})
 this.setState({RelationshipLicenceownervalue:ItemInfo.RelationshiporLicenceowner})
 this.setState({ToggleHidevalue:ItemInfo.ToggleHide})
+this.setState({Restrickedvalue:ItemInfo.Restricte})
+this.setState({AccessibilityTool:ItemInfo.AccessibilityTool})
+this.setState({AccessibilityDescription:ItemInfo.AccessibilityDescription})
 
 
 
@@ -655,9 +698,12 @@ this.setState({ItemId:ItemInfo.ID})
         AmountUsed:this.state.AmountUsedvalue,
         InfoSecOutcome:this.state.InfoSecOutcomevalue,
         ReasonforInfoSecDecline:this.state.ReasonforInfoSecDeclinevalue,
-        ApplicationRestrictedto:this.state.ApplicationRestrictedtovalue,
+        RestrictedGroup:this.state.ApplicationRestrictedtovalue,
         Provider:this.state.Providervalue,
-        ToggleHide:this.state.ToggleHidevalue
+        ToggleHide:this.state.ToggleHidevalue,
+        Restricte:this.state.Restrickedvalue,
+        AccessibilityTool:this.state.AccessibilityTool,
+        AccessibilityDescription:this.state.AccessibilityDescription
 
       });
           console.log(itemId);
@@ -995,10 +1041,10 @@ alert("Item Updated successfully")
                 <br/>
                 <Stack horizontal tokens={sectionStackTokens}>
                 <StackItem className={styles.commonstyle}>
-                  <b>InfoSec OutCome</b>
+                  <b>InfoSec Review</b>
                 </StackItem>
                 <StackItem className={styles.commonstyle}>
-                  <b>App Restricted to</b>
+                  <b> Restricted Group</b>
                 </StackItem>
               </Stack>
               <Stack horizontal tokens={sectionStackTokens}>
@@ -1018,7 +1064,16 @@ alert("Item Updated successfully")
                 <StackItem className={styles.commonstyle}>
                   <b>Toggle Hide</b>
                 </StackItem>
+                <StackItem className={styles.commonstyle}>
+                  <b>Restricted</b>
+                </StackItem>
+                <StackItem className={styles.commonstyle}>
+                  <b>Accessibility Tool</b>
+                </StackItem>
+             
               </Stack>
+             
+              
               <Stack horizontal tokens={sectionStackTokens}>
                 <StackItem className={styles.commonstyleDescRightbox}>
                 
@@ -1030,7 +1085,29 @@ alert("Item Updated successfully")
                 <ChoiceGroup  id="Toggle"  name="ToggleOptions"  defaultSelectedKey={this.state.ToggleHidevalue} options={Radiotest}   onChange={this.ToggleHide.bind(this)}  selectedKey={this.state.ToggleHidevalue}/> 
                 
                 </StackItem><br/><br/><br/>
+                <StackItem className={styles.commonstyleDescRightbox}>
+                <ChoiceGroup  id="Restric"  name="RestrickedOptions"  defaultSelectedKey={this.state.Restrickedvalue} options={Radiotest}   onChange={this.Restricked.bind(this)}  selectedKey={this.state.Restrickedvalue}/> 
+                
+                </StackItem><br/><br/><br/>
+                <StackItem className={styles.commonstyleDescRightbox}>
+                <ChoiceGroup  id="AccessTool"  name="AccessibilityTool"  defaultSelectedKey={this.state.AccessibilityTool} options={Radiotest}   onChange={this.AccessibilityTool.bind(this)}  selectedKey={this.state.AccessibilityTool}/> 
+                
+                </StackItem><br/><br/><br/>
                 </Stack> <br/>
+        
+              <Stack horizontal tokens={sectionStackTokens}>
+                <StackItem className={styles.myDescBox}>
+                  <Stack>
+                  <label className={styles.alignCenter}>Accessibility Description</label>
+                    <br />
+                    <Stack className={styles.whitDescBox}>
+                    <StackItem >
+                      <textarea name="Descritool" className={styles.multiline}   value={this.state.AccessibilityDescription == null ? 'N/A' : this.state.AccessibilityDescription} onChange={this.handleChangeAccessibilityDescription}/>
+                      </StackItem>
+                    </Stack>
+                  </Stack>
+                </StackItem>
+              </Stack>
                 <Stack horizontal tokens={sectionStackTokens}>
 <StackItem className={styles.coststyle}>
 <PrimaryButton id='save' name='update' text="Save" onClick={(event) => { this.UpdateData(event, this.state.ItemId) }} styles={stackButtonStyles} className={styles.button} value={this.state.ItemId} />
